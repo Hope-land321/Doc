@@ -1,0 +1,30 @@
+📢 *[RESSOURCES TECHNIQUES TRC25 - Phase Finale]*
+
+Salut les équipes finalistes 🚀, <@&1377582264279498854> 
+Pour bien préparer vos robots à la grande finale de *Novembre 2025 à Cotonou, nous mettons à dispo toutes les **ressources essentielles* :
+
+🔹 *Simulation ROS Gazebo*
+• Modèle 3D complet de l’arène EcoCity (5m x 5m)
+• Config quartiers + modèles robots (Rosmaster X3 & Dofbot)
+• Scripts + doc d’installation
+👉 [Lien de téléchargement : https://github.com/TekBot-Robotics-Challenge/2025-ROS-Ressources.git]
+
+🔹 *Dataset IA (déchets)*
+• Images (ménagers, recyclables, dangereux) + annotations
+• Scripts d’exemple pour l’entraînement
+👉 [Lien de téléchargement : https://github.com/TekBot-Robotics-Challenge/2025-AI-Ressources]
+
+🔹 *Plans PDF de l’Arène*
+• Arène imprimable *1:1* avec zones, QR codes, stations de tri
+• Guide de montage pour recréer les conditions réelles
+👉 [Lien de téléchargement : https://drive.google.com/drive/folders/1S6piu2dnff1CVKoUXm5AaoLhZJbU6v0n?usp=sharing]
+
+
+💡 *Tips d’utilisation* :
+✅ Testez d’abord vos algorithmes en *simulation (Gazebo)*
+✅ Entraînez vos modèles IA avec *tout le dataset fourni*
+✅ Reproduisez l’arène physique (prévoir un espace 6m x 6m)
+
+
+🛠 En cas de souci → posez vos questions à vos *mentors assignés*. <@&1377766712975556741> <@&1377766286930477106> <@&1377588298054373447> <@&1377766521392074833> 
+🔥 Ces ressources sont la clé pour performer en finale → téléchargez-les dès maintenant et lancez vos préparations !
