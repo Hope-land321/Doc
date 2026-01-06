@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOFBOT - Document Complet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.05"><path d="M0,0 L100,0 L100,100 Z" fill="white"/></svg>');
+            background-size: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-right: 2rem;
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar h2 i {
+            color: var(--secondary-color);
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section h3 {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background-color: #e3f2fd;
+            border-left-color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .nav-links a.active {
+            background-color: #e3f2fd;
+            border-left-color: var(--secondary-color);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .nav-links i {
+            width: 20px;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+        }
+
+        .challenge-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .challenge-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .challenge-title h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-title .badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .challenge-nav button {
+            background-color: var(--light-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark-color);
+        }
+
+        .challenge-nav button:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .challenge-content h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .challenge-content h3 i {
+            color: var(--accent-color);
+        }
+
+        .challenge-content p {
+            margin-bottom: 1rem;
+        }
+
+        .challenge-content ul, .challenge-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-box {
+            background-color: #ffebee;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 1.5rem 0;
+        }
+
+        .error-box h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tools-box {
+            background-color: #f0f9eb;
+            border-left: 4px solid var(--success-color);
+            padding: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 1.5rem 0;
+        }
+
+        .tools-box h4 {
+            color: var(--success-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-box {
+            background-color: #f3e5f5;
+            border-left: 4px solid #9b59b6;
+            padding: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 1.5rem 0;
+        }
+
+        .link-box h4 {
+            color: #9b59b6;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .team-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .team-tag {
+            background-color: var(--light-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .team-tag.ros {
+            background-color: #e3f2fd;
+            color: var(--secondary-color);
+        }
+
+        .team-tag.ia {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .challenges-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .challenge-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .challenge-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .challenge-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .challenge-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .challenges-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-robot"></i> DOCUMENT COMPLET - PROJET DOFBOT</h1>
+        <p class="subtitle">Approche par DÉFIS D'INGÉNIERIE (Agile)</p>
+    </header>
+
+    <div class="container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <h2><i class="fas fa-bars"></i> Navigation</h2>
+            
+            <div class="nav-section">
+                <h3><i class="fas fa-cogs"></i> PARTIE A - MOUVEMENTS</h3>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-target="A1"><i class="fas fa-play"></i> A1 - Mouvements élémentaires</a></li>
+                    <li><a href="#" class="nav-link" data-target="A2"><i class="fas fa-sync-alt"></i> A2 - Mouvements coordonnés</a></li>
+                    <li><a href="#" class="nav-link" data-target="A3"><i class="fas fa-hand-paper"></i> A3 - Pick & Place sans vision</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3><i class="fas fa-eye"></i> PARTIE B - ANALYSE & RECONNAISSANCE</h3>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-target="B1"><i class="fas fa-camera"></i> B1 - Acquisition & Pipeline</a></li>
+                    <li><a href="#" class="nav-link" data-target="B2"><i class="fas fa-object-group"></i> B2 - Reconnaissance d'objets</a></li>
+                    <li><a href="#" class="nav-link" data-target="B3"><i class="fas fa-map-marker-alt"></i> B3 - Localisation spatiale</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3><i class="fas fa-brain"></i> PARTIE C - DÉCISION & AUTONOMIE</h3>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-target="C"><i class="fas fa-chess-board"></i> C - Prise de décision</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3><i class="fas fa-project-diagram"></i> Vue d'ensemble</h3>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-target="overview"><i class="fas fa-list-ol"></i> Tous les défis</a></li>
+                    <li><a href="#" class="nav-link" data-target="conclusion"><i class="fas fa-flag-checkered"></i> Conclusion</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="challenge-section active">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <h2><i class="fas fa-project-diagram"></i> Vue d'ensemble du projet DOFBOT</h2>
+                        <p>Ce projet est structuré en <strong>9 défis</strong> organisés en phases logiques et progressives.</p>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <p>Le projet DOFBOT suit une approche par défis d'ingénierie en méthode Agile, divisée en trois parties principales :</p>
+                    
+                    <h3><i class="fas fa-cogs"></i> PARTIE A - MOUVEMENTS (ACTION ROBOTIQUE)</h3>
+                    <p>Contrôle des mouvements du robot, des articulations élémentaires aux actions complexes.</p>
+                    
+                    <h3><i class="fas fa-eye"></i> PARTIE B - ANALYSE & RECONNAISSANCE D'IMAGES</h3>
+                    <p>Perception visuelle, de l'acquisition d'images à la localisation spatiale des objets.</p>
+                    
+                    <h3><i class="fas fa-brain"></i> PARTIE C - DÉCISION & AUTONOMIE</h3>
+                    <p>Intégration de la perception et de l'action pour une autonomie complète.</p>
+                    
+                    <div class="challenges-summary">
+                        <div class="challenge-card" data-target="A1">
+                            <h3><span class="badge">A1</span> Contrôle articulaire</h3>
+                            <p>Commander chaque articulation individuellement de manière sûre et contrôlée.</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="A2">
+                            <h3><span class="badge">A2</span> Trajectoires coordonnées</h3>
+                            <p>Synchroniser plusieurs articulations pour un mouvement fluide et cohérent.</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="A3">
+                            <h3><span class="badge">A3</span> Actions Pick & Place</h3>
+                            <p>Transformer une suite de mouvements en action significative (sans vision).</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="B1">
+                            <h3><span class="badge">B1</span> Pipeline image</h3>
+                            <p>Fournir un flux image stable et exploitable en temps réel.</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="B2">
+                            <h3><span class="badge">B2</span> Reconnaissance d'objets</h3>
+                            <p>Transformer l'image en informations exploitables (identification d'objets).</p>
+                            <div class="team-tags">
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="B3">
+                            <h3><span class="badge">B3</span> Localisation spatiale</h3>
+                            <p>Transformer les pixels en coordonnées exploitables par le bras.</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-card" data-target="C">
+                            <h3><span class="badge">C</span> Décision et autonomie</h3>
+                            <p>Introduire une logique de décision claire et robuste.</p>
+                            <div class="team-tags">
+                                <span class="team-tag ros">ROS</span>
+                                <span class="team-tag ia">IA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>Chaque défi résolu constitue <strong>une étape démontrable</strong>, exploitable pour un diagramme de Gantt, avec des dépendances claires et des interfaces définies.</p>
+                </div>
+            </section>
+
+            <!-- Challenge A1 -->
+            <section id="A1" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI A1</span>
+                        <h2>MOUVEMENTS ÉLÉMENTAIRES (Bas niveau)</h2>
+                        <p>Contrôle individuel des articulations du DOFBOT</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le DOFBOT est présent, mais ses articulations ne sont pas maîtrisées. Chaque mouvement peut être dangereux ou imprécis.</p>
+                    <p><strong>Défi :</strong> Comment commander chaque articulation individuellement de manière sûre, répétable et contrôlée ?</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Chaque articulation répond aux commandes</li>
+                        <li>Limites physiques respectées</li>
+                        <li>Poses de référence définies (home, rest, safe)</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Créer un node ROS de commande articulaire</li>
+                        <li>Implémenter limites d'angle et vitesse</li>
+                        <li>Définir poses standards</li>
+                        <li>Publier/recevoir sur un topic ROS</li>
+                    </ul>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Observer les capacités physiques</li>
+                        <li>Documenter les limites et contraintes</li>
+                        <li>Aucune action directe</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Connaissance mécanique réelle</li>
+                            <li>Publication / lecture d'un message ROS</li>
+                            <li>Test répétitif lent et fiable</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Bouger plusieurs joints en même temps</li>
+                            <li>Ignorer les limites physiques</li>
+                            <li>Tester à pleine vitesse</li>
+                            <li>Confondre simulation et réel</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>Drivers DOFBOT officiels</li>
+                            <li>ros_control</li>
+                            <li>Scripts Python de base</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec le prochain défi</h4>
+                        <p>Préparer le passage à des <strong>trajectoires coordonnées</strong> multi-joints (Défi A2)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge A2 -->
+            <section id="A2" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI A2</span>
+                        <h2>MOUVEMENTS COORDONNÉS (Trajectoires)</h2>
+                        <p>Synchronisation des articulations pour un mouvement fluide</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le bras bouge, mais les mouvements sont saccadés et indépendants.</p>
+                    <p><strong>Défi :</strong> Comment synchroniser plusieurs articulations pour obtenir un mouvement fluide et cohérent ?</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Trajectoires fluides et synchronisées</li>
+                        <li>Répétables et fiables</li>
+                        <li>Commande encapsulée dans des primitives simples</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Implémenter interpolation linéaire / cubique</li>
+                        <li>Synchroniser positions et temps</li>
+                        <li>Node de trajectoire haut niveau</li>
+                    </ul>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Comprendre comment déclencher une action</li>
+                        <li>Préparer les primitives pour la suite (Pick/Place)</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Interpolation stable</li>
+                            <li>Timing correct</li>
+                            <li>Test répété des trajectoires</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Commander les joints indépendamment</li>
+                            <li>Ignorer le temps et la vitesse</li>
+                            <li>Trajectoires non reproductibles</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>trajectory_msgs/JointTrajectory</li>
+                            <li>MoveIt Task Constructor (optionnel)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec le prochain défi</h4>
+                        <p>Préparer le robot à <strong>exécuter des actions complètes</strong> (Pick & Place) - Défi A3</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge A3 -->
+            <section id="A3" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI A3</span>
+                        <h2>BOUGER AVEC UNE INTENTION (Pick & Place sans vision)</h2>
+                        <p>Transformation de mouvements en actions significatives</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le robot peut bouger, mais il ne fait rien d'utile.</p>
+                    <p><strong>Défi :</strong> Comment transformer une suite de mouvements en action significative ?</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Pick & Place simple et fiable</li>
+                        <li>Encapsulation dans fonctions ou services ROS (pick(), place())</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Définir primitives d'action : approche, descente, fermeture gripper, levée, déplacement, ouverture</li>
+                        <li>Gérer timings et vitesses</li>
+                        <li>Encapsulation dans node manipulation_actions</li>
+                    </ul>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Comprendre le vocabulaire d'action</li>
+                        <li>Documenter contraintes et préconditions</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Découper une action en phases simples</li>
+                            <li>Tester chaque phase isolément</li>
+                            <li>Répéter et stabiliser</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Mélanger vision et mouvement trop tôt</li>
+                            <li>Actions trop complexes</li>
+                            <li>Absence de gestion d'échec</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>MoveIt Task Constructor</li>
+                            <li>FSM basiques</li>
+                            <li>Scripts Pick & Place simples</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec B3</h4>
+                        <p>Préparer le robot à <strong>agir sur des objets détectés</strong> avec coordonnées réelles</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge B1 -->
+            <section id="B1" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI B1</span>
+                        <h2>ACQUISITION & PIPELINE IMAGE</h2>
+                        <p>Flux image stable et exploitable en temps réel</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le robot est aveugle.</p>
+                    <p><strong>Défi :</strong> Comment fournir un flux image stable et exploitable en temps réel ?</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Image propre, stabilisée, prétraitée</li>
+                        <li>Topic ROS exploitable</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Capture caméra</li>
+                        <li>Prétraitement : resize, normalisation, filtrage</li>
+                        <li>Publication /camera/image_processed</li>
+                    </ul>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Intégrer le node dans la chaîne ROS</li>
+                        <li>Gérer paramètres temps réel</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Image stable > modèle complexe</li>
+                            <li>Pipeline rapide</li>
+                            <li>Prétraitement simple mais cohérent</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Trop de filtres</li>
+                            <li>Latence excessive</li>
+                            <li>Image mal alignée</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>OpenCV</li>
+                            <li>cv_bridge</li>
+                            <li>sensor_msgs/Image</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec B2</h4>
+                        <p>Base pour la reconnaissance d'objets</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge B2 -->
+            <section id="B2" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI B2</span>
+                        <h2>RECONNAISSANCE D'OBJETS</h2>
+                        <p>Transformation de l'image en informations exploitables</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le robot voit des pixels mais ne comprend pas ce qu'il voit.</p>
+                    <p><strong>Défi :</strong> Comment transformer l'image en informations exploitables ?</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Objet identifié</li>
+                        <li>Score de confiance</li>
+                        <li>Résultat stable et structuré</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Intégrer modèle IA existant (YOLO, MobileNet, Detectron)</li>
+                        <li>Gérer faux positifs</li>
+                        <li>Publier /detected_object</li>
+                    </ul>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Souscription au topic</li>
+                        <li>Visualisation et logging</li>
+                        <li>Vérification compatibilité avec Pick & Place</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Dataset correct</li>
+                            <li>Seuils de confiance appropriés</li>
+                            <li>Stabilité de la détection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Lier directement IA et mouvement</li>
+                            <li>Surentraîner le modèle</li>
+                            <li>Ignorer les faux positifs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>TensorRT / ONNX</li>
+                            <li>Nodes ROS existants pour détection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec B3</h4>
+                        <p>Base pour <strong>localiser réellement l'objet dans l'espace</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge B3 -->
+            <section id="B3" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI B3</span>
+                        <h2>LOCALISATION SPATIALE DE L'OBJET</h2>
+                        <p>Transformation des pixels en coordonnées exploitables par le bras</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Reconnaître un objet ne suffit pas, il faut savoir où il est dans l'espace réel.</p>
+                    <p><strong>Défi :</strong> Transformer les pixels en coordonnées exploitables par le bras.</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Pose dans le repère base_link</li>
+                        <li>Exploitable directement par le Pick & Place</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Conversion 2D → 3D</li>
+                        <li>Utilisation de la calibration caméra</li>
+                        <li>Publication /object_pose (geometry_msgs/PoseStamped)</li>
+                    </ul>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Vérification cinématique</li>
+                        <li>Transformation TF</li>
+                        <li>Validation d'atteignabilité</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>Calibration caméra</li>
+                            <li>TF corrects</li>
+                            <li>Référentiels cohérents</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Travaux sans TF</li>
+                            <li>Hypothèses incorrectes sur caméra</li>
+                            <li>Ignorer l'erreur de position</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>TF2</li>
+                            <li>ArUco / Depth Camera</li>
+                            <li>image_geometry</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec C</h4>
+                        <p>Prérequis pour que le robot <strong>agisse intelligemment</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge C -->
+            <section id="C" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <span class="badge">DÉFI C</span>
+                        <h2>FAIRE DES CHOIX (Decision Making)</h2>
+                        <p>Introduction d'une logique de décision claire et robuste</p>
+                    </div>
+                    <div class="challenge-nav">
+                        <button id="prev-btn" title="Défi précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-btn" title="Défi suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <h3><i class="fas fa-exclamation-circle"></i> 1. Problème réel</h3>
+                    <p>Le robot voit et sait agir, mais ne sait pas quoi faire.</p>
+                    <p><strong>Défi :</strong> Introduire une logique de décision claire et robuste.</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> 2. Objectif attendu</h3>
+                    <ul>
+                        <li>Choix d'action autonome</li>
+                        <li>Gestion des échecs</li>
+                        <li>Comportement explicable</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-users"></i> 3. Travail des équipes</h3>
+                    <div class="team-tags">
+                        <span class="team-tag ros">Équipe ROS</span>
+                        <span class="team-tag ia">Équipe IA</span>
+                    </div>
+                    <p><strong>Équipe IA :</strong></p>
+                    <ul>
+                        <li>Règles simples ou policy IA</li>
+                        <li>Émission de commandes abstraites (PICK object_A, IGNORE, RETRY)</li>
+                    </ul>
+                    <p><strong>Équipe ROS :</strong></p>
+                    <ul>
+                        <li>Machine à états / Behavior Tree</li>
+                        <li>Validation et sécurisation des commandes</li>
+                        <li>Gestion des échecs et logs</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-star"></i> 5. 20% critiques</h4>
+                        <ul>
+                            <li>FSM simple et lisible</li>
+                            <li>États explicites</li>
+                            <li>Logging clair</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 6. Erreurs classiques</h4>
+                        <ul>
+                            <li>Décision implicite</li>
+                            <li>IA qui commande directement les moteurs</li>
+                            <li>États cachés</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> 7. Outils existants</h4>
+                        <ul>
+                            <li>SMACH / Behavior Trees</li>
+                            <li>ROS2 Lifecycle nodes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-box">
+                        <h4><i class="fas fa-link"></i> 8. Lien avec A/B</h4>
+                        <p>Fusion de perception et action pour autonomie complète</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion Section -->
+            <section id="conclusion" class="challenge-section">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <h2><i class="fas fa-flag-checkered"></i> Conclusion du Projet DOFBOT</h2>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <p>Ces <strong>9 défis</strong> structurent le projet DOFBOT en <strong>phases logiques et progressives</strong> :</p>
+                    
+                    <ol>
+                        <li><strong>A1</strong> -- Contrôle articulaire</li>
+                        <li><strong>A2</strong> -- Trajectoires coordonnées</li>
+                        <li><strong>A3</strong> -- Actions Pick & Place</li>
+                        <li><strong>B1</strong> -- Pipeline image</li>
+                        <li><strong>B2</strong> -- Reconnaissance</li>
+                        <li><strong>B3</strong> -- Localisation spatiale</li>
+                        <li><strong>C</strong> -- Décision et autonomie</li>
+                    </ol>
+                    
+                    <p>Chaque défi résolu constitue <strong>une étape démontrable</strong>, exploitable pour un <strong>diagramme de Gantt</strong>, avec des dépendances claires et des interfaces définies.</p>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-chart-line"></i> Approche méthodologique</h4>
+                        <p>L'approche par défis d'ingénierie adoptée suit une méthodologie Agile, permettant :</p>
+                        <ul>
+                            <li>Une progression incrémentale et itérative</li>
+                            <li>Une validation continue des sous-systèmes</li>
+                            <li>Une gestion efficace des risques techniques</li>
+                            <li>Une collaboration optimale entre les équipes ROS et IA</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tools-box">
+                        <h4><i class="fas fa-sitemap"></i> Architecture globale</h4>
+                        <p>Le projet DOFBOT s'articule autour de trois piliers fondamentaux :</p>
+                        <ul>
+                            <li><strong>Mouvement (Partie A)</strong> : Contrôle physique et coordination des actions</li>
+                            <li><strong>Perception (Partie B)</strong> : Acquisition, analyse et interprétation du monde environnant</li>
+                            <li><strong>Décision (Partie C)</strong> : Intelligence et autonomie du système</li>
+                        </ul>
+                        <p>Cette architecture modulaire permet une maintenance aisée et une extensibilité du système.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>Projet DOFBOT - Approche par Défis d'Ingénierie (Agile)</p>
+        <p>Document complet structuré en 9 défis progressifs</p>
+        <p><small>© 2023 - DOFBOT Project Team</small></p>
+    </footer>
+
+    <script>
+        // Navigation between challenges
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const challengeCards = document.querySelectorAll('.challenge-card');
+            const challengeSections = document.querySelectorAll('.challenge-section');
+            const prevButtons = document.querySelectorAll('#prev-btn');
+            const nextButtons = document.querySelectorAll('#next-btn');
+            
+            // Define the order of challenges for navigation
+            const challengeOrder = ['overview', 'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C', 'conclusion'];
+            
+            // Function to show a specific challenge
+            function showChallenge(challengeId) {
+                // Hide all challenge sections
+                challengeSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected challenge section
+                const targetSection = document.getElementById(challengeId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+                
+                // Update active state in navigation
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-target') === challengeId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // Store the current challenge in session storage
+                sessionStorage.setItem('currentChallenge', challengeId);
+            }
+            
+            // Navigation link click event
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetChallenge = this.getAttribute('data-target');
+                    showChallenge(targetChallenge);
+                    
+                    // Scroll to top of content area on mobile
+                    if (window.innerWidth < 1024) {
+                        document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Challenge card click event
+            challengeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const targetChallenge = this.getAttribute('data-target');
+                    showChallenge(targetChallenge);
+                    
+                    // Scroll to top of content area on mobile
+                    if (window.innerWidth < 1024) {
+                        document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Previous button click event
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentSection = document.querySelector('.challenge-section.active');
+                    const currentId = currentSection ? currentSection.id : 'overview';
+                    const currentIndex = challengeOrder.indexOf(currentId);
+                    
+                    if (currentIndex > 0) {
+                        showChallenge(challengeOrder[currentIndex - 1]);
+                    } else {
+                        showChallenge(challengeOrder[challengeOrder.length - 1]); // Wrap to last
+                    }
+                });
+            });
+            
+            // Next button click event
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentSection = document.querySelector('.challenge-section.active');
+                    const currentId = currentSection ? currentSection.id : 'overview';
+                    const currentIndex = challengeOrder.indexOf(currentId);
+                    
+                    if (currentIndex < challengeOrder.length - 1) {
+                        showChallenge(challengeOrder[currentIndex + 1]);
+                    } else {
+                        showChallenge(challengeOrder[0]); // Wrap to first
+                    }
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentSection = document.querySelector('.challenge-section.active');
+                const currentId = currentSection ? currentSection.id : 'overview';
+                const currentIndex = challengeOrder.indexOf(currentId);
+                
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        showChallenge(challengeOrder[currentIndex - 1]);
+                    }
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (currentIndex < challengeOrder.length - 1) {
+                        showChallenge(challengeOrder[currentIndex + 1]);
+                    }
+                }
+            });
+            
+            // Load last viewed challenge from session storage
+            const lastChallenge = sessionStorage.getItem('currentChallenge');
+            if (lastChallenge) {
+                showChallenge(lastChallenge);
+            } else {
+                // Default to overview
+                showChallenge('overview');
+            }
+            
+            // Add animation to challenge cards on hover
+            challengeCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
